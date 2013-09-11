@@ -12,4 +12,4 @@ Powers include:
 
 Right-click to switch modes, and left-click to use the emerald's power.
 
-(Note: for powers to work, you must not punch an enemy.  I may fix this later, but at the very least a nearly-always-guaranteed way to trigger the power if you are swarmed is by clicking at your feet.)
+(Note: for powers to work, you must not punch an entity.  I may fix this later, but at the very least a nearly-always-guaranteed way to trigger the power if you are swarmed is by clicking at your feet.)
