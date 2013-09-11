@@ -1,0 +1,10 @@
+name: ChaosControl
+main: com.gmail.buzziespy.ChaosControl.ChaosControl
+version: 0.5
+
+commands:
+   givechaos:
+      description: Gives player a Chaos Emerald
+      usage: /givechaos
+      permission: op
+      permission-message:
