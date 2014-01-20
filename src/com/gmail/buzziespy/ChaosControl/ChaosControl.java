@@ -112,6 +112,7 @@ public final class ChaosControl extends JavaPlugin implements Listener{
 		if (e.getEntity().hasMetadata("ChaosControl.Blast") && e.getCause().equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION))
 		{
 			e.getEntity().removeMetadata("ChaosControl.Blast", this);
+			e.getEntity().removeMetadata("ChaosControl.BlastProcess", this);
 			e.setCancelled(true);
 		}
 	}
@@ -204,6 +205,13 @@ public final class ChaosControl extends JavaPlugin implements Listener{
 							return;
 						}
 						
+						//if a blast is in progress, do nothing
+						if (e.getPlayer().hasMetadata("ChaosControl.BlastProcess"))
+						{
+							e.getPlayer().sendMessage(ChatColor.RED + "Your Chaos Blast is already in process!");
+							return;
+						}
+						
 						//prepare the blast when it actually occurs
 						final Player p = e.getPlayer();
 						final FixedMetadataValue blastdata = new FixedMetadataValue(this, "true");
@@ -235,6 +243,7 @@ public final class ChaosControl extends JavaPlugin implements Listener{
 						//inflict slowness 2 on player for 2 seconds and announce 
 						p.setLevel(p.getLevel() - CHAOSBLAST_COST);
 						p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
+						p.setMetadata("ChaosControl.BlastProcess", blastdata);
 						s.broadcastMessage("<" + p.getName() + "> " + ChatColor.RED + "Chaos...");
 						
 						//unleash blast 2 seconds later
@@ -244,6 +253,11 @@ public final class ChaosControl extends JavaPlugin implements Listener{
 					{
 						//Chaos Control - can probably just write one helper method for this?
 						Block target = e.getPlayer().getTargetBlock(null, 100);
+						//If player targets something out of range (air is returned), do nothing
+						if (target.getType().equals(Material.AIR))
+						{
+							return;
+						}
 						ChaosTeleport(e.getPlayer(), target);
 					}
 				}
