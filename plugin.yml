@@ -1,6 +1,6 @@
 name: ChaosControl
 main: com.gmail.buzziespy.ChaosControl.ChaosControl
-version: 0.5
+version: 1.0
 
 commands:
    givechaos:
